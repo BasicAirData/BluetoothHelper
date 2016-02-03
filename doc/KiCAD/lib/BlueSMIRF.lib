@@ -1,0 +1,22 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#
+# BlueSMiRF_Gold
+#
+DEF BlueSMiRF_Gold U 0 40 Y Y 1 F N
+F0 "U" 0 400 60 H V C CNN
+F1 "BlueSMiRF_Gold" 0 -400 60 H V C CNN
+F2 "" 0 -400 60 H V C CNN
+F3 "" 0 -400 60 H V C CNN
+DRAW
+S -500 300 500 -300 0 1 0 N
+X CTS-I ~ -700 250 200 R 50 50 1 1 I
+X GND ~ -700 50 200 R 50 50 1 1 I
+X RTS-O ~ -700 -250 200 R 50 50 1 1 I
+X RX-I ~ -700 -150 200 R 50 50 1 1 I
+X TX-O ~ -700 -50 200 R 50 50 1 1 I
+X VCC ~ -700 150 200 R 50 50 1 1 I
+ENDDRAW
+ENDDEF
+#
+#End Library
