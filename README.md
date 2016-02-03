@@ -1,4 +1,5 @@
-#BasicAirData BluetoothHelper Java Class for Android
+#BasicAirData BluetoothHelper
+##Bluetooth Java Class for Android
 This Java Class implements a message based Bluetooth wireless comunication layer between an Android device (client) and a microcontroller (server).
 
 This repository contains:
