@@ -7,7 +7,7 @@ This repository contains:
 - <b>Android/BluetoothHelper.class</b> = The Helper Class for Android;
 
 The repo includes also a very simple but fully functional example, that shows how to use the helper class:
-- <b>Android/BluetoothHelperExample/</b> = Example app for Android (less than 100 lines of code, with comments!) that controls 2 leds (one ON/OFF using a button and one in PWM using a slider);
+- <b>Android/BluetoothHelperExample/</b> = Example app for Android - less than 100 lines of code, with comments! - that controls 2 leds (one ON/OFF using a button and one in PWM using a slider);
 - <b>Arduino/BluetoothHelperExample/</b> = The sketch for Arduino; this example (ready to be uploaded on Arduino 2009) is made to communicate with the example app;
 - <b>doc/</b> = The related documentation. The folder includes the electrical scheme of the microcontroller circuit, showing one of the possible hardware configurations (Arduino 2009 + BlueSMIRF Gold);
 
