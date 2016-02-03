@@ -1,17 +1,22 @@
-package eu.basicairdata.graziano.BluetoothHelper;
+package eu.basicairdata.graziano.bluetoothhelperexample;
 
 /**
- * Created by GC (BasicAirData) on 15/01/16.
- * Released under the term of the GNU GENERAL PUBLIC LICENSE Version 2, June 1991
+ * BluetoothHelper Java Helper Class for Android
+ * Created by G.Capelli (BasicAirData) on 02/02/16.
  *
- * Version: 1.0.0
- * Author: Capelli G.
- * Author URI: http://www.basicairdata.eu
- * License: GPLv2
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
  **/
 
 import android.bluetooth.BluetoothAdapter;
@@ -33,15 +38,12 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class BluetoothHelper {
 
     private BluetoothAdapter mBluetoothAdapter = null;
-
     private boolean isInStreamConnected = false;
     private boolean isOutStreamConnected = false;
-
     private ConnectThread CT = null;
     private ConnectedThreadClass_Read readThread = null;
     private ConnectedThreadClass_Write writeThread = null;
     private Handler handler = new Handler();
-
     private BlockingQueue<String> inputMessagesQueue = new LinkedBlockingQueue<String>();
     private BlockingQueue<String> outputMessagesQueue = new LinkedBlockingQueue<String>();
 
@@ -51,7 +53,6 @@ public class BluetoothHelper {
         private final BluetoothSocket mmSocket;
         private final BluetoothDevice mmDevice;
         private BluetoothSocket tmp = null;
-
 
         public ConnectThread(BluetoothDevice device) {
             // Use a temporary object that is later assigned to mmSocket,

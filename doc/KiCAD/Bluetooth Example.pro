@@ -1,4 +1,4 @@
-update=dom 31 gen 2016 22:30:10 CET
+update=mer 03 feb 2016 22:19:47 CET
 version=1
 last_client=kicad
 [general]
@@ -27,19 +27,6 @@ ModuleOutlineThickness=0.150000000000
 [cvpcb]
 version=1
 NetIExt=net
-[schematic_editor]
-version=1
-PageLayoutDescrFile=
-PlotDirectoryName=
-SubpartIdSeparator=0
-SubpartFirstId=65
-NetFmtName=
-SpiceForceRefPrefix=0
-SpiceUseNetNumbers=0
-RptD_X=0
-RptD_Y=100
-RptLab=1
-LabSize=60
 [eeschema]
 version=1
 LibDir=
@@ -76,3 +63,16 @@ LibName29=contrib
 LibName30=lib/BlueSMIRF
 LibName31=valves
 LibName32=lib/arduino_shieldsNCL
+[schematic_editor]
+version=1
+PageLayoutDescrFile=
+PlotDirectoryName=
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=
+SpiceForceRefPrefix=0
+SpiceUseNetNumbers=0
+RptD_X=0
+RptD_Y=100
+RptLab=1
+LabSize=60

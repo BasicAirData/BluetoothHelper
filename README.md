@@ -1,7 +1,7 @@
 #BasicAirData BluetoothHelper
 ##Bluetooth Java Class for Android
 This Java Class implements an easy message-based Bluetooth wireless comunication layer between an **Android device** (the client) and a **Microcontroller** (the server).<br>
-Using this class you can Connect, Disconnect, Send String messages, Receive String messages via Listener (the preferred way) or with explicit poll, automatically reconnect and check the status of your Bluetooth connection in a simple and thread-safe way.
+Using this class you can Connect, Disconnect, Send String messages, Receive String messages via Listener (the preferred way) or with explicit polling, automatically reconnect and check the status of your Bluetooth connection in a simple and thread-safe way.
 
 This repository contains:
 - <b>Android/BluetoothHelper.class</b> = The Helper Class for Android;
