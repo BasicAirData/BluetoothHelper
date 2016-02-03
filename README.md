@@ -1,13 +1,13 @@
 #BasicAirData BluetoothHelper Java Class for Android
-This Java Class helps to implement a message based Bluetooth wireless comunication layer between one Android device and one microcontroller.
+This Java Class implements a message based Bluetooth wireless comunication layer between an Android device (client) and a microcontroller (server).
 
 This repository contains:
-- BluetoothHelper.class: The Helper Class for Android;
+- <b>Android/BluetoothHelper.class</b> = The Helper Class for Android;
 
 The repo includes also a very simple but fully functional example, that shows how to use the helper class:
-- One app for Android: The example app controls 2 leds (one ON/OFF using a button and one in PWM using a slider).
-- BluetoothHelper_Example.ino: the sketch for Arduino; this example, ready to be uploaded on Arduino 2009, is made to communicate with the example app;
-- The electrical scheme of the microcontroller side circuit, also showing the hardware used (Arduino 2009 + BlueSMIRF Gold);
+- <b>Android/BluetoothHelperExample</b> = Example app for Android (less than 100 lines of code, with comments) that controls 2 leds (one ON/OFF using a button and one in PWM using a slider);
+- <b>Arduino/BluetoothHelperExample/BluetoothHelper_Example.ino</b> = The sketch for Arduino; this example (ready to be uploaded on Arduino 2009) communicates with the example app;
+- <b>doc/KiCAD/</b> = The electrical scheme of the microcontroller circuit, showing one of the possible hardware configurations (Arduino 2009 + BlueSMIRF Gold);
 
 [BasicAirData](http://www.basicairdata.eu) Open and free DIY air data instrumentation and telemetry
 [What is BasicAirData?](http://www.basicairdata.eu/attachments/others/BAD%20Brochure.pdf)
