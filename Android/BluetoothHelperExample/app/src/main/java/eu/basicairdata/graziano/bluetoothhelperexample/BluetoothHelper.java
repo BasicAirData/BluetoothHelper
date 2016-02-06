@@ -3,6 +3,7 @@ package eu.basicairdata.graziano.bluetoothhelperexample;
 /**
  * BluetoothHelper Java Helper Class for Android
  * Created by G.Capelli (BasicAirData) on 02/02/16.
+ * v.1.0.1
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
