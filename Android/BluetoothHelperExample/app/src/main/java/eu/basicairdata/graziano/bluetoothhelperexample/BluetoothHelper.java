@@ -2,8 +2,8 @@ package eu.basicairdata.graziano.bluetoothhelperexample;
 
 /**
  * BluetoothHelper Java Helper Class for Android
- * Created by G.Capelli (BasicAirData) on 02/02/16.
- * v.1.0.1
+ * Created by G.Capelli (BasicAirData) on 06/02/16.
+ * v.1.0.2
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -354,17 +354,17 @@ public class BluetoothHelper {
     }
 
 
-    // Read a message from the INPUT buffer (and delete it from READ queue);
+    // Receive a message from the INPUT buffer (and delete it from RECEIVE queue);
     // Use this function if you don't have listener attached.
     // Listener method is the preferred one.
-    public String Read() {
+    public String ReceiveMessage() {
         String m = inputMessagesQueue.poll();
         return (m != null ? m : "");
     }
 
 
-    // Write a message to the OUTPUT buffer (add it to SEND queue)
-    public boolean Write(String msg) {
+    // Send a message to the OUTPUT buffer (add it to SEND queue)
+    public boolean SendMessage(String msg) {
         if (isConnected()) {
             return (outputMessagesQueue.offer(msg));
         } else return false;

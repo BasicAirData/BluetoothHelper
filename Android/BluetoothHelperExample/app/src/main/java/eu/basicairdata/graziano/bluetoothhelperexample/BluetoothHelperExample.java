@@ -1,7 +1,9 @@
 package eu.basicairdata.graziano.bluetoothhelperexample;
 
 /**
- * Example app Created by G.Capelli (BasicAirData) on 02/02/16.
+ * BluetoothHelper Java Helper Class for Android - Example app
+ * Created by G.Capelli (BasicAirData) on 06/02/16.
+ * v.1.0.2
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -63,7 +65,7 @@ public class BluetoothHelperExample extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (mBluetooth.isConnected()) {
                     // Write the new value to Bluetooth (The String is something like "$PWM,128")
-                    mBluetooth.Write("$PWM," + seekBar.getProgress());
+                    mBluetooth.SendMessage("$PWM," + seekBar.getProgress());
                 }
             }
 
@@ -76,7 +78,7 @@ public class BluetoothHelperExample extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {
                 if (mBluetooth.isConnected()) {
                     // Write the new value to Bluetooth
-                    mBluetooth.Write("$PWM," + seekBar.getProgress());
+                    mBluetooth.SendMessage("$PWM," + seekBar.getProgress());
                 }
             }
         });
@@ -94,7 +96,7 @@ public class BluetoothHelperExample extends AppCompatActivity {
                     mTextViewStatus.setText("Connected");
                 } else {
                     mTextViewStatus.setText("Disconnected");
-                    // Auto reconnect:
+                    // Auto reconnect!
                     mBluetooth.Connect(DEVICE_NAME);
                 }
             }
@@ -105,7 +107,7 @@ public class BluetoothHelperExample extends AppCompatActivity {
     public void onButtonClick(View view) {
         if (mBluetooth.isConnected()) {
             //Switch the value of the led
-            mBluetooth.Write(led ? "$LED,0" : "$LED,1");
+            mBluetooth.SendMessage(led ? "$LED,0" : "$LED,1");
             led = !led;
         }
     }
