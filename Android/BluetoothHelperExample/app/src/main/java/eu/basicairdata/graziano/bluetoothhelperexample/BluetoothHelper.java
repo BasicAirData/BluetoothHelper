@@ -199,9 +199,11 @@ public class BluetoothHelper {
                     // Read from the InputStream until DELIMITER found
                     while ((ch = (byte) mmInStream.read()) != Delimiter) {
                         buffer[i++] = ch;
+                        //Log.w("myApp", "[#] Character received from BlueTooth");
                     }
                     buffer[i] = '\0';
                     final String msg = new String(buffer);
+                    //Log.w("myApp", "[#] Delimiter received from BlueTooth");
                     MessageReceived(msg.trim());
                 } catch (IOException e) {
                     isInStreamConnected = false;
