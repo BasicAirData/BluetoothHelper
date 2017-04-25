@@ -1,9 +1,9 @@
-package eu.basicairdata.graziano.BluetoothHelper;
+package eu.basicairdata.graziano.adctester;
 
 /**
  * BluetoothHelper Java Helper Class for Android
  * Created by G.Capelli (BasicAirData) on 06/02/16.
- * v.1.0.2
+ * v.1.0.3
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -156,6 +156,7 @@ public class BluetoothHelper {
                 writeThread.interrupt();
                 if (mmSocket.isConnected()) mmSocket.close();
             } catch (IOException e) {
+            } catch (NullPointerException e) {
             }
         }
     }
@@ -163,8 +164,8 @@ public class BluetoothHelper {
 
     private void InCaseFireonBluetoothHelperConnectionStateChanged() {
         if (listener != null) {
-            //if (isConnected()) Log.w("myApp", "[#] Listener fired: onBluetoothHelperConnectionStateChanged = true");
-            //else Log.w("myApp", "[#] Listener fired: onBluetoothHelperConnectionStateChanged = false");
+            if (isConnected()) Log.w("myApp", "[#] Listener fired: onBluetoothHelperConnectionStateChanged = true");
+            else Log.w("myApp", "[#] Listener fired: onBluetoothHelperConnectionStateChanged = false");
             listener.onBluetoothHelperConnectionStateChanged(this, isConnected()); // <---- fire listener
         }
     }
@@ -199,11 +200,9 @@ public class BluetoothHelper {
                     // Read from the InputStream until DELIMITER found
                     while ((ch = (byte) mmInStream.read()) != Delimiter) {
                         buffer[i++] = ch;
-                        //Log.w("myApp", "[#] Character received from BlueTooth");
                     }
                     buffer[i] = '\0';
                     final String msg = new String(buffer);
-                    //Log.w("myApp", "[#] Delimiter received from BlueTooth");
                     MessageReceived(msg.trim());
                 } catch (IOException e) {
                     isInStreamConnected = false;
