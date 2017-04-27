@@ -1,4 +1,5 @@
-package eu.basicairdata.graziano.bluetoothhelper;
+package eu.basicairdata.graziano.bluetoothhelper;    // Change it with your project package name !!
+
 
 /**
  * BluetoothHelper Java Helper Class for Android
