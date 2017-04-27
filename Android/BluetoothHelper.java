@@ -1,4 +1,4 @@
-package eu.basicairdata.graziano.adctester;
+package eu.basicairdata.graziano.bluetoothhelper;
 
 /**
  * BluetoothHelper Java Helper Class for Android
