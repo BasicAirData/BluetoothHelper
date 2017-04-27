@@ -1,10 +1,11 @@
 package eu.basicairdata.graziano.bluetoothhelperexample;
 
-// ------------------------------------------------------------------------------------------------
-// THIS IS A COPY OF THE LIBRARY, MADE IN ORDER TO SHOW THE INCLUSION IN THE BLUETOOTHEXAMPLE APP.
-// IT COULD BE AN OLDER VERSION OF THE HELPER CLASS. PLEASE USE THE LATEST VERSION, HOSTED HERE:
+// -----------------------------------------------------------------------------------------------------
+// THIS IS A LOCAL COPY OF THE LIBRARY, MADE IN ORDER TO SHOW THE INCLUSION IN THE EXAMPLE APP.
+// IT COULD BE AN OLDER VERSION OF THE HELPER CLASS.
+// IF YOU WANT TO INCLUDE BLUETOOTHHELPER IN YOUR PROJECT, PLEASE USE THE LATEST VERSION HOSTED HERE:
 // https://github.com/BasicAirData/BluetoothHelper/blob/master/Android/BluetoothHelper.java
-// ------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------------------------
 
 /**
  * BluetoothHelper Java Helper Class for Android
