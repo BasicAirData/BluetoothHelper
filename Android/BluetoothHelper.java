@@ -37,6 +37,19 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 
+/**
+* A Bluetooth Java helper Class for Android. 
+* This Java Class implements an easy message-based Bluetooth wireless comunication layer between an **Android device** (the client) and a **Microcontroller** (the server).
+* 
+* Using this class you can Connect, Disconnect, Send String messages, Receive String messages via Listener (best way)
+* or with explicit polling, automatically reconnect and check the status of your Bluetooth connection in a simple and thread-safe way.<br>
+* You can read the incoming messages attaching a Listener or using explicit polling.<br>
+* Connection, reading and writing processes are asynchronously made using 3 separated Threads.<br>
+* This Class is compatible with Android 4.0+
+* @version 1.0.3
+* @author BasicAirData
+*/
+
 public class BluetoothHelper {
 
     private BluetoothAdapter mBluetoothAdapter = null;
@@ -281,10 +294,20 @@ public class BluetoothHelper {
 
     // -------------------------------------------------------------------------------------------- Listeners interface
     public interface BluetoothHelperListener {
-        // These methods are the different events and
-        // need to pass relevant arguments related to the event triggered
+        /**
+        * Event fired each time a message is received from the remote device.
+        * The event is received by your listeners in a worker thread;
+        * @param bluetoothhelper The BluetoothHelper class
+        * @param message The message received
+        */
         public void onBluetoothHelperMessageReceived(BluetoothHelper bluetoothhelper, String message);
 
+        /**
+        * Event fired when the connection status changes.
+        * The event is also fired when the Connect() method ends, returning the result of the Connect() request.
+        * @param bluetoothhelper The BluetoothHelper class
+        * @param isConnected The status of the connection
+        */
         public void onBluetoothHelperConnectionStateChanged(BluetoothHelper bluetoothhelper, boolean isConnected);
     }
 
@@ -295,25 +318,59 @@ public class BluetoothHelper {
     // The listener must implement the events interface and passes messages up to the parent.
     private BluetoothHelperListener listener;
 
-    // The messages delimiter. That character is the separator between every
-    // incoming and send messages.
+/**
+* The messages delimiter.
+* That character is the separator between every incoming (and sent) messages.<br>
+* It is automatically appended to every string passed to SendMessage, and removed to every message received.
+*/
     public char Delimiter = '\n';
 
 
-    // Assign the listener implementing events interface that will receive the events
+/**
+* Adds the specified BluetoothHelper listener to receive events from this class.
+* Events occur when a message is received, or the connection status is changed. If it is null, no exception is thrown and no action is performed.<br>
+* This is the preferred method to receive messages.
+*
+* Each message you'll receive will be notified with a:
+* <pre>
+*    public void onBluetoothHelperMessageReceived(BluetoothHelper bluetoothhelper, String message)
+* </pre>
+*
+* Each time the status of the connection changes will be notified with a:
+* <pre>
+*    public void onBluetoothHelperConnectionStateChanged(BluetoothHelper bluetoothhelper, boolean isConnected)
+* </pre>
+* @param listener The BluetoothHelperListener
+*/
     public void setBluetoothHelperListener(BluetoothHelperListener listener) {
         this.listener = listener;
     }
 
 
-    // It returns true if the connection is up, false otherwise.
+/**
+* Returns the state of the connection.
+* The method returns true only if all the communication streams are opened.<br>
+* It return false also in case of connection in progress.
+* @return The the connection state: true if the connection is opened, false otherwhise.
+*/
     public boolean isConnected() {
         return (isInStreamConnected && isOutStreamConnected);
     }
 
 
-    // It bootstraps the connection to the paired device with corresponding name.
-    // The function does return immediately, when the connecting process is in progress.
+/**
+* Connects to the remote device (server) with the specified name.
+* It bootstraps the connection to the paired device “DeviceName” if exists.<br>
+* The function does return immediately, when the connection process is yet in progress, with no result.<br>
+* You can receive a notification when the connection process is completed attaching a BluetoothHelperListener.
+* As an alternative you can chech the connection status with the isConnected() method described below.<br>
+* An onBluetoothHelperConnectionStateChanged event occurs (if listener is attached) when the connection process terminates, returning the new status of the connection.
+* In case of success, the class will be ready to communicate with the remote device.
+* @param DeviceName The DeviceName of the remote Device
+* @see BluetoothAdapter
+* @see BluetoothAdapter.getBondedDevices()
+* @see BluetoothDevice.getName()
+*/
     public void Connect(String DeviceName) {
         if (!isConnected()) {
             Disconnect(false);
@@ -332,14 +389,24 @@ public class BluetoothHelper {
         }
     }
 
-    // It cleans the in/out buffers
+
+/**
+* Clear all pending incoming and outcoming messages.
+* It clears the inputMessageQueue and then the outputMessageQueue, used by separate threads to perform communication.<br>
+* Normally this method is called by class itself during the Disconnection process, and should not be called.<br>
+* The method is public in case of particular user needs.
+*/
     public void ClearBuffer() {
         inputMessagesQueue.clear();                          // Clear the input message queue;
         outputMessagesQueue.clear();                         // Clear the output message queue;
     }
 
 
-    // Disconnect, It cleans also the in/out buffers by default
+/**
+* Disconnects from the connected remote device (server).
+* The method closes the Streams, the Socket and terminates all the threads that manage the connection and the communication.<br>
+* An onBluetoothHelperConnectionStateChanged event occurs (if listener is attached) when the disconnection process terminates, returning the new status of the connection.
+*/
     public void Disconnect() {
         if (CT != null) {
             if (CT.isAlive()) CT.cancel();
@@ -347,7 +414,14 @@ public class BluetoothHelper {
         ClearBuffer();
     }
 
-    // Disconnect, specifying if you want to clean the in/out buffers
+
+/**
+* Disconnects from the connected remote device (server).
+* The method closes the Streams, the Socket and terminates all the threads that manage the connection.<br>
+* Then it clears all pending incoming and outcoming messages, if requested.<br>
+* An onBluetoothHelperConnectionStateChanged event occurs (if listener is attached) when the disconnection process terminates, returning the new status of the connection.
+* @param ClearBuffer If true, disconnects from the remote device clearing all pending incoming outcoming messages; otherwise, disconnects without touching the queues.
+*/
     public void Disconnect(boolean ClearBuffer) {
         if (CT != null) {
             if (CT.isAlive()) CT.cancel();
@@ -356,16 +430,30 @@ public class BluetoothHelper {
     }
 
 
-    // Receive a message from the INPUT buffer (and delete it from RECEIVE queue);
-    // Use this function if you don't have listener attached.
-    // Listener method is the preferred one.
+/**
+* Returns the oldest message received and buffered.
+* The incoming messages are asynchronously stored in a LinkedBlockingQueue.
+* With this method you can get the oldest received message that you have not yet read. That message is deleted from the queue.<br>
+* Each time you call ReceiveMessage method you'll obtain the next unread message.<br>
+*
+* Please note that the preferred method to receive messages is attaching a listener, with the setBluetoothHelperListener method described below.<br>
+* If the listener is attached, ReceiveMessage will ever returns an empty string, because each received message is sent directly to the attached listener.
+* @see setBluetoothHelperListener()
+* @return The String containing the message. An empty string otherwise
+*/
     public String ReceiveMessage() {
         String m = inputMessagesQueue.poll();
         return (m != null ? m : "");
     }
 
 
-    // Send a message to the OUTPUT buffer (add it to SEND queue)
+/**
+* Send a message to the remote device.
+* The message is stored in a LinkedBlockingQueue and asynchronously sent to the remote device by the dedicate thread.<br>
+* The function returns true if the message is stored in the sending queue.
+* @param msg The message to send
+* @return true if the message is stored in the sending queue. false if a problem occurs
+*/
     public boolean SendMessage(String msg) {
         if (isConnected()) {
             return (outputMessagesQueue.offer(msg));
