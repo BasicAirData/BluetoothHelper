@@ -1,4 +1,4 @@
-package eu.basicairdata.graziano.bluetoothhelper;    // Change it with your project package name !!
+package eu.basicairdata.bluetoothhelper;    // Change it with your project package name !!
 
 
 /**
