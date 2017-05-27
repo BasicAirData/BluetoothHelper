@@ -4,7 +4,6 @@ package eu.basicairdata.bluetoothhelper;    // Change it with your project packa
 /**
  * BluetoothHelper Java Helper Class for Android
  * Created by G.Capelli (BasicAirData) on 06/02/16.
- * v.1.0.3
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,14 +38,14 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 /**
 * A Bluetooth Java helper Class for Android. 
-* This Java Class implements an easy message-based Bluetooth wireless comunication layer between an **Android device** (the client) and a **Microcontroller** (the server).
+* This Java Class implements an easy message-based Bluetooth wireless communication layer between an **Android device** (the client) and a **Microcontroller** (the server).
 * 
 * Using this class you can Connect, Disconnect, Send String messages, Receive String messages via Listener (best way)
 * or with explicit polling, automatically reconnect and check the status of your Bluetooth connection in a simple and thread-safe way.<br>
 * You can read the incoming messages attaching a Listener or using explicit polling.<br>
 * Connection, reading and writing processes are asynchronously made using 3 separated Threads.<br>
 * This Class is compatible with Android 4.0+
-* @version 1.0.3
+* @version 1.0.5
 * @author BasicAirData
 */
 
@@ -360,10 +359,10 @@ public class BluetoothHelper {
 
 /**
 * Connects to the remote device (server) with the specified name.
-* It bootstraps the connection to the paired device “DeviceName” if exists.<br>
+* It bootstraps the connection to the paired (bonded) device named “DeviceName” if exists.<br>
 * The function does return immediately, when the connection process is yet in progress, with no result.<br>
 * You can receive a notification when the connection process is completed attaching a BluetoothHelperListener.
-* As an alternative you can chech the connection status with the isConnected() method described below.<br>
+* As an alternative you can check the connection status with the isConnected() method described below.<br>
 * An onBluetoothHelperConnectionStateChanged event occurs (if listener is attached) when the connection process terminates, returning the new status of the connection.
 * In case of success, the class will be ready to communicate with the remote device.
 * @param DeviceName The DeviceName of the remote Device
@@ -389,6 +388,32 @@ public class BluetoothHelper {
         }
     }
 
+
+
+    /**
+     * Connects to the remote BluetoothDevice (server).
+     * It bootstraps the connection to the paired (bonded) device BluetoothDevice if exists.<br>
+     * The function does return immediately, when the connection process is yet in progress, with no result.<br>
+     * You can receive a notification when the connection process is completed attaching a BluetoothHelperListener.
+     * As an alternative you can check the connection status with the isConnected() method described below.<br>
+     * An onBluetoothHelperConnectionStateChanged event occurs (if listener is attached) when the connection process terminates, returning the new status of the connection.
+     * In case of success, the class will be ready to communicate with the remote device.
+     * @param bluetoothDevice The remote BluetoothDevice
+     * @see BluetoothAdapter
+     * @see BluetoothAdapter.getBondedDevices()
+     * @see BluetoothDevice
+     */
+    public void Connect(BluetoothDevice bluetoothDevice) {
+        if (!isConnected()) {
+            Disconnect(false);
+
+            mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();                               // Find adapter
+            if (mBluetoothAdapter.isEnabled()) {                                                    // Adapter found
+                CT = new ConnectThread(bluetoothDevice);
+                CT.start();
+            }
+        }
+    }
 
 /**
 * Clear all pending incoming and outcoming messages.

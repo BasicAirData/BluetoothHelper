@@ -1,0 +1,51 @@
+\section{Bluetooth\+Helper.\+Bluetooth\+Helper\+Listener Interface Reference}
+\label{interfaceeu_1_1basicairdata_1_1bluetoothhelper_1_1BluetoothHelper_1_1BluetoothHelperListener}\index{Bluetooth\+Helper.\+Bluetooth\+Helper\+Listener@{Bluetooth\+Helper.\+Bluetooth\+Helper\+Listener}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ on\+Bluetooth\+Helper\+Message\+Received} (\textbf{ Bluetooth\+Helper} bluetoothhelper, String message)
+\begin{DoxyCompactList}\small\item\em Event fired each time a message is received from the remote device. \end{DoxyCompactList}\item 
+void \textbf{ on\+Bluetooth\+Helper\+Connection\+State\+Changed} (\textbf{ Bluetooth\+Helper} bluetoothhelper, boolean \textbf{ is\+Connected})
+\begin{DoxyCompactList}\small\item\em Event fired when the connection status changes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\label{interfaceeu_1_1basicairdata_1_1bluetoothhelper_1_1BluetoothHelper_1_1BluetoothHelperListener_a18b102116cd0b4301740569209062462}} 
+\index{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper\+::\+Bluetooth\+Helper\+Listener@{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper\+::\+Bluetooth\+Helper\+Listener}!on\+Bluetooth\+Helper\+Connection\+State\+Changed@{on\+Bluetooth\+Helper\+Connection\+State\+Changed}}
+\index{on\+Bluetooth\+Helper\+Connection\+State\+Changed@{on\+Bluetooth\+Helper\+Connection\+State\+Changed}!eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper\+::\+Bluetooth\+Helper\+Listener@{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper\+::\+Bluetooth\+Helper\+Listener}}
+\subsubsection{on\+Bluetooth\+Helper\+Connection\+State\+Changed()}
+{\footnotesize\ttfamily void on\+Bluetooth\+Helper\+Connection\+State\+Changed (\begin{DoxyParamCaption}\item[{\textbf{ Bluetooth\+Helper}}]{bluetoothhelper,  }\item[{boolean}]{is\+Connected }\end{DoxyParamCaption})}
+
+
+
+Event fired when the connection status changes. 
+
+The event is also fired when the \doxyref{Connect()}{p.}{classeu_1_1basicairdata_1_1bluetoothhelper_1_1BluetoothHelper_a8239955fadff0358c4506e232cf5cb7d} method ends, returning the result of the \doxyref{Connect()}{p.}{classeu_1_1basicairdata_1_1bluetoothhelper_1_1BluetoothHelper_a8239955fadff0358c4506e232cf5cb7d} request. 
+\begin{DoxyParams}{Parameters}
+{\em bluetoothhelper} & The \doxyref{Bluetooth\+Helper}{p.}{classeu_1_1basicairdata_1_1bluetoothhelper_1_1BluetoothHelper} class \\
+\hline
+{\em is\+Connected} & The status of the connection \\
+\hline
+\end{DoxyParams}
+\mbox{\label{interfaceeu_1_1basicairdata_1_1bluetoothhelper_1_1BluetoothHelper_1_1BluetoothHelperListener_ad1f414bec7e84facf189ac79f8bfcf5a}} 
+\index{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper\+::\+Bluetooth\+Helper\+Listener@{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper\+::\+Bluetooth\+Helper\+Listener}!on\+Bluetooth\+Helper\+Message\+Received@{on\+Bluetooth\+Helper\+Message\+Received}}
+\index{on\+Bluetooth\+Helper\+Message\+Received@{on\+Bluetooth\+Helper\+Message\+Received}!eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper\+::\+Bluetooth\+Helper\+Listener@{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper\+::\+Bluetooth\+Helper\+Listener}}
+\subsubsection{on\+Bluetooth\+Helper\+Message\+Received()}
+{\footnotesize\ttfamily void on\+Bluetooth\+Helper\+Message\+Received (\begin{DoxyParamCaption}\item[{\textbf{ Bluetooth\+Helper}}]{bluetoothhelper,  }\item[{String}]{message }\end{DoxyParamCaption})}
+
+
+
+Event fired each time a message is received from the remote device. 
+
+The event is received by your listeners in a worker thread; 
+\begin{DoxyParams}{Parameters}
+{\em bluetoothhelper} & The \doxyref{Bluetooth\+Helper}{p.}{classeu_1_1basicairdata_1_1bluetoothhelper_1_1BluetoothHelper} class \\
+\hline
+{\em message} & The message received \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Bluetooth\+Helper.\+java\end{DoxyCompactItemize}

@@ -1,0 +1,248 @@
+\section{Bluetooth\+Helper Class Reference}
+\label{classeu_1_1basicairdata_1_1bluetoothhelper_1_1BluetoothHelper}\index{Bluetooth\+Helper@{Bluetooth\+Helper}}
+
+
+A Bluetooth Java helper Class for Android.  
+
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+interface \textbf{ Bluetooth\+Helper\+Listener}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ set\+Bluetooth\+Helper\+Listener} (\textbf{ Bluetooth\+Helper\+Listener} listener)
+\begin{DoxyCompactList}\small\item\em Adds the specified \doxyref{Bluetooth\+Helper}{p.}{classeu_1_1basicairdata_1_1bluetoothhelper_1_1BluetoothHelper} listener to receive events from this class. \end{DoxyCompactList}\item 
+boolean \textbf{ is\+Connected} ()
+\begin{DoxyCompactList}\small\item\em Returns the state of the connection. \end{DoxyCompactList}\item 
+void \textbf{ Connect} (String Device\+Name)
+\begin{DoxyCompactList}\small\item\em Connects to the remote device (server) with the specified name. \end{DoxyCompactList}\item 
+void \textbf{ Connect} (Bluetooth\+Device bluetooth\+Device)
+\begin{DoxyCompactList}\small\item\em Connects to the remote Bluetooth\+Device (server). \end{DoxyCompactList}\item 
+void \textbf{ Clear\+Buffer} ()
+\begin{DoxyCompactList}\small\item\em Clear all pending incoming and outcoming messages. \end{DoxyCompactList}\item 
+void \textbf{ Disconnect} ()
+\begin{DoxyCompactList}\small\item\em Disconnects from the connected remote device (server). \end{DoxyCompactList}\item 
+void \textbf{ Disconnect} (boolean \textbf{ Clear\+Buffer})
+\begin{DoxyCompactList}\small\item\em Disconnects from the connected remote device (server). \end{DoxyCompactList}\item 
+String \textbf{ Receive\+Message} ()
+\begin{DoxyCompactList}\small\item\em Returns the oldest message received and buffered. \end{DoxyCompactList}\item 
+boolean \textbf{ Send\+Message} (String msg)
+\begin{DoxyCompactList}\small\item\em Send a message to the remote device. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+char \textbf{ Delimiter} = \textquotesingle{}\textbackslash{}n\textquotesingle{}
+\begin{DoxyCompactList}\small\item\em The messages delimiter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A Bluetooth Java helper Class for Android. 
+
+This Java Class implements an easy message-\/based Bluetooth wireless communication layer between an {\bfseries Android device} (the client) and a {\bfseries Microcontroller} (the server).
+
+Using this class you can Connect, Disconnect, Send String messages, Receive String messages via Listener (best way) or with explicit polling, automatically reconnect and check the status of your Bluetooth connection in a simple and thread-\/safe way.~\newline
+ You can read the incoming messages attaching a Listener or using explicit polling.~\newline
+ Connection, reading and writing processes are asynchronously made using 3 separated Threads.~\newline
+ This Class is compatible with Android 4.\+0+ \begin{DoxyVersion}{Version}
+1.\+0.\+5 
+\end{DoxyVersion}
+\begin{DoxyAuthor}{Author}
+Basic\+Air\+Data 
+\end{DoxyAuthor}
+
+
+\subsection{Member Function Documentation}
+\mbox{\label{classeu_1_1basicairdata_1_1bluetoothhelper_1_1BluetoothHelper_af28fe6832f4dd3f13033e5c666525f07}} 
+\index{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper@{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper}!Clear\+Buffer@{Clear\+Buffer}}
+\index{Clear\+Buffer@{Clear\+Buffer}!eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper@{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper}}
+\subsubsection{Clear\+Buffer()}
+{\footnotesize\ttfamily void Clear\+Buffer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Clear all pending incoming and outcoming messages. 
+
+It clears the input\+Message\+Queue and then the output\+Message\+Queue, used by separate threads to perform communication.~\newline
+ Normally this method is called by class itself during the Disconnection process, and should not be called.~\newline
+ The method is public in case of particular user needs. \mbox{\label{classeu_1_1basicairdata_1_1bluetoothhelper_1_1BluetoothHelper_a8239955fadff0358c4506e232cf5cb7d}} 
+\index{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper@{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper}!Connect@{Connect}}
+\index{Connect@{Connect}!eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper@{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper}}
+\subsubsection{Connect()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Connect (\begin{DoxyParamCaption}\item[{String}]{Device\+Name }\end{DoxyParamCaption})}
+
+
+
+Connects to the remote device (server) with the specified name. 
+
+It bootstraps the connection to the paired (bonded) device named “\+Device\+Name” if exists.~\newline
+ The function does return immediately, when the connection process is yet in progress, with no result.~\newline
+ You can receive a notification when the connection process is completed attaching a \doxyref{Bluetooth\+Helper\+Listener}{p.}{interfaceeu_1_1basicairdata_1_1bluetoothhelper_1_1BluetoothHelper_1_1BluetoothHelperListener}. As an alternative you can check the connection status with the \doxyref{is\+Connected()}{p.}{classeu_1_1basicairdata_1_1bluetoothhelper_1_1BluetoothHelper_afbf4768f0408a85337dbb9f1413d611a} method described below.~\newline
+ An on\+Bluetooth\+Helper\+Connection\+State\+Changed event occurs (if listener is attached) when the connection process terminates, returning the new status of the connection. In case of success, the class will be ready to communicate with the remote device. 
+\begin{DoxyParams}{Parameters}
+{\em Device\+Name} & The Device\+Name of the remote Device \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+Bluetooth\+Adapter 
+
+Bluetooth\+Adapter.\+get\+Bonded\+Devices() 
+
+Bluetooth\+Device.\+get\+Name() 
+\end{DoxySeeAlso}
+\mbox{\label{classeu_1_1basicairdata_1_1bluetoothhelper_1_1BluetoothHelper_a3d98aad14e680ea9978e0dd82c2571b2}} 
+\index{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper@{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper}!Connect@{Connect}}
+\index{Connect@{Connect}!eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper@{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper}}
+\subsubsection{Connect()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Connect (\begin{DoxyParamCaption}\item[{Bluetooth\+Device}]{bluetooth\+Device }\end{DoxyParamCaption})}
+
+
+
+Connects to the remote Bluetooth\+Device (server). 
+
+It bootstraps the connection to the paired (bonded) device Bluetooth\+Device if exists.~\newline
+ The function does return immediately, when the connection process is yet in progress, with no result.~\newline
+ You can receive a notification when the connection process is completed attaching a \doxyref{Bluetooth\+Helper\+Listener}{p.}{interfaceeu_1_1basicairdata_1_1bluetoothhelper_1_1BluetoothHelper_1_1BluetoothHelperListener}. As an alternative you can check the connection status with the \doxyref{is\+Connected()}{p.}{classeu_1_1basicairdata_1_1bluetoothhelper_1_1BluetoothHelper_afbf4768f0408a85337dbb9f1413d611a} method described below.~\newline
+ An on\+Bluetooth\+Helper\+Connection\+State\+Changed event occurs (if listener is attached) when the connection process terminates, returning the new status of the connection. In case of success, the class will be ready to communicate with the remote device. 
+\begin{DoxyParams}{Parameters}
+{\em bluetooth\+Device} & The remote Bluetooth\+Device \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+Bluetooth\+Adapter 
+
+Bluetooth\+Adapter.\+get\+Bonded\+Devices() 
+
+Bluetooth\+Device 
+\end{DoxySeeAlso}
+\mbox{\label{classeu_1_1basicairdata_1_1bluetoothhelper_1_1BluetoothHelper_a65d18fa17ec0238d7e72f6c8f5c880b6}} 
+\index{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper@{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper}!Disconnect@{Disconnect}}
+\index{Disconnect@{Disconnect}!eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper@{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper}}
+\subsubsection{Disconnect()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Disconnect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Disconnects from the connected remote device (server). 
+
+The method closes the Streams, the Socket and terminates all the threads that manage the connection and the communication.~\newline
+ An on\+Bluetooth\+Helper\+Connection\+State\+Changed event occurs (if listener is attached) when the disconnection process terminates, returning the new status of the connection. \mbox{\label{classeu_1_1basicairdata_1_1bluetoothhelper_1_1BluetoothHelper_a9ec368da03f0bc7aed0855b47a2a874c}} 
+\index{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper@{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper}!Disconnect@{Disconnect}}
+\index{Disconnect@{Disconnect}!eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper@{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper}}
+\subsubsection{Disconnect()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Disconnect (\begin{DoxyParamCaption}\item[{boolean}]{Clear\+Buffer }\end{DoxyParamCaption})}
+
+
+
+Disconnects from the connected remote device (server). 
+
+The method closes the Streams, the Socket and terminates all the threads that manage the connection.~\newline
+ Then it clears all pending incoming and outcoming messages, if requested.~\newline
+ An on\+Bluetooth\+Helper\+Connection\+State\+Changed event occurs (if listener is attached) when the disconnection process terminates, returning the new status of the connection. 
+\begin{DoxyParams}{Parameters}
+{\em Clear\+Buffer} & If true, disconnects from the remote device clearing all pending incoming outcoming messages; otherwise, disconnects without touching the queues. \\
+\hline
+\end{DoxyParams}
+\mbox{\label{classeu_1_1basicairdata_1_1bluetoothhelper_1_1BluetoothHelper_afbf4768f0408a85337dbb9f1413d611a}} 
+\index{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper@{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper}!is\+Connected@{is\+Connected}}
+\index{is\+Connected@{is\+Connected}!eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper@{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper}}
+\subsubsection{is\+Connected()}
+{\footnotesize\ttfamily boolean is\+Connected (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the state of the connection. 
+
+The method returns true only if all the communication streams are opened.~\newline
+ It return false also in case of connection in progress. \begin{DoxyReturn}{Returns}
+The the connection state\+: true if the connection is opened, false otherwhise. 
+\end{DoxyReturn}
+\mbox{\label{classeu_1_1basicairdata_1_1bluetoothhelper_1_1BluetoothHelper_adf4de53406c02fd549f4bafbb51812af}} 
+\index{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper@{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper}!Receive\+Message@{Receive\+Message}}
+\index{Receive\+Message@{Receive\+Message}!eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper@{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper}}
+\subsubsection{Receive\+Message()}
+{\footnotesize\ttfamily String Receive\+Message (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the oldest message received and buffered. 
+
+The incoming messages are asynchronously stored in a Linked\+Blocking\+Queue. With this method you can get the oldest received message that you have not yet read. That message is deleted from the queue.~\newline
+ Each time you call Receive\+Message method you\textquotesingle{}ll obtain the next unread message.~\newline
+
+
+Please note that the preferred method to receive messages is attaching a listener, with the set\+Bluetooth\+Helper\+Listener method described below.~\newline
+ If the listener is attached, Receive\+Message will ever returns an empty string, because each received message is sent directly to the attached listener. \begin{DoxySeeAlso}{See also}
+\doxyref{set\+Bluetooth\+Helper\+Listener()}{p.}{classeu_1_1basicairdata_1_1bluetoothhelper_1_1BluetoothHelper_afbd01dc45b93929de03c394d3f4b913f} 
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+The String containing the message. An empty string otherwise 
+\end{DoxyReturn}
+\mbox{\label{classeu_1_1basicairdata_1_1bluetoothhelper_1_1BluetoothHelper_ad7aa3bf3849b24ae3e088ce9e445ad8d}} 
+\index{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper@{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper}!Send\+Message@{Send\+Message}}
+\index{Send\+Message@{Send\+Message}!eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper@{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper}}
+\subsubsection{Send\+Message()}
+{\footnotesize\ttfamily boolean Send\+Message (\begin{DoxyParamCaption}\item[{String}]{msg }\end{DoxyParamCaption})}
+
+
+
+Send a message to the remote device. 
+
+The message is stored in a Linked\+Blocking\+Queue and asynchronously sent to the remote device by the dedicate thread.~\newline
+ The function returns true if the message is stored in the sending queue. 
+\begin{DoxyParams}{Parameters}
+{\em msg} & The message to send \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the message is stored in the sending queue. false if a problem occurs 
+\end{DoxyReturn}
+\mbox{\label{classeu_1_1basicairdata_1_1bluetoothhelper_1_1BluetoothHelper_afbd01dc45b93929de03c394d3f4b913f}} 
+\index{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper@{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper}!set\+Bluetooth\+Helper\+Listener@{set\+Bluetooth\+Helper\+Listener}}
+\index{set\+Bluetooth\+Helper\+Listener@{set\+Bluetooth\+Helper\+Listener}!eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper@{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper}}
+\subsubsection{set\+Bluetooth\+Helper\+Listener()}
+{\footnotesize\ttfamily void set\+Bluetooth\+Helper\+Listener (\begin{DoxyParamCaption}\item[{\textbf{ Bluetooth\+Helper\+Listener}}]{listener }\end{DoxyParamCaption})}
+
+
+
+Adds the specified \doxyref{Bluetooth\+Helper}{p.}{classeu_1_1basicairdata_1_1bluetoothhelper_1_1BluetoothHelper} listener to receive events from this class. 
+
+Events occur when a message is received, or the connection status is changed. If it is null, no exception is thrown and no action is performed.~\newline
+ This is the preferred method to receive messages.
+
+Each message you\textquotesingle{}ll receive will be notified with a\+: 
+\begin{DoxyPre}
+   public void onBluetoothHelperMessageReceived(BluetoothHelper bluetoothhelper, String message)
+\end{DoxyPre}
+
+
+Each time the status of the connection changes will be notified with a\+: 
+\begin{DoxyPre}
+   public void onBluetoothHelperConnectionStateChanged(BluetoothHelper bluetoothhelper, boolean isConnected)
+\end{DoxyPre}
+ 
+\begin{DoxyParams}{Parameters}
+{\em listener} & The \doxyref{Bluetooth\+Helper\+Listener}{p.}{interfaceeu_1_1basicairdata_1_1bluetoothhelper_1_1BluetoothHelper_1_1BluetoothHelperListener} \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\mbox{\label{classeu_1_1basicairdata_1_1bluetoothhelper_1_1BluetoothHelper_ad68e2886d9320e3eed8dcfca3cd158ce}} 
+\index{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper@{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper}!Delimiter@{Delimiter}}
+\index{Delimiter@{Delimiter}!eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper@{eu\+::basicairdata\+::bluetoothhelper\+::\+Bluetooth\+Helper}}
+\subsubsection{Delimiter}
+{\footnotesize\ttfamily char Delimiter = \textquotesingle{}\textbackslash{}n\textquotesingle{}}
+
+
+
+The messages delimiter. 
+
+That character is the separator between every incoming (and sent) messages.~\newline
+ It is automatically appended to every string passed to Send\+Message, and removed to every message received. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Bluetooth\+Helper.\+java\end{DoxyCompactItemize}
