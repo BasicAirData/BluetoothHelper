@@ -1,4 +1,4 @@
-package eu.basicairdata.bluetoothhelper;    // Change it with your project package name !!
+package eu.basicairdata.bluetoothhelper;
 
 
 /**
@@ -366,9 +366,9 @@ public class BluetoothHelper {
 * An onBluetoothHelperConnectionStateChanged event occurs (if listener is attached) when the connection process terminates, returning the new status of the connection.
 * In case of success, the class will be ready to communicate with the remote device.
 * @param DeviceName The DeviceName of the remote Device
-* @see BluetoothAdapter
-* @see BluetoothAdapter.getBondedDevices()
-* @see BluetoothDevice.getName()
+* @see android.bluetooth.BluetoothAdapter
+* @see android.bluetooth.BluetoothAdapter#getBondedDevices()
+* @see android.bluetooth.BluetoothDevice#getName()
 */
     public void Connect(String DeviceName) {
         if (!isConnected()) {
@@ -399,9 +399,9 @@ public class BluetoothHelper {
      * An onBluetoothHelperConnectionStateChanged event occurs (if listener is attached) when the connection process terminates, returning the new status of the connection.
      * In case of success, the class will be ready to communicate with the remote device.
      * @param bluetoothDevice The remote BluetoothDevice
-     * @see BluetoothAdapter
-     * @see BluetoothAdapter.getBondedDevices()
-     * @see BluetoothDevice
+     * @see android.bluetooth.BluetoothAdapter
+     * @see android.bluetooth.BluetoothAdapter#getBondedDevices()
+     * @see android.bluetooth.BluetoothDevice
      */
     public void Connect(BluetoothDevice bluetoothDevice) {
         if (!isConnected()) {
@@ -463,7 +463,7 @@ public class BluetoothHelper {
 *
 * Please note that the preferred method to receive messages is attaching a listener, with the setBluetoothHelperListener method described below.<br>
 * If the listener is attached, ReceiveMessage will ever returns an empty string, because each received message is sent directly to the attached listener.
-* @see setBluetoothHelperListener()
+* @see BluetoothHelper setBluetoothHelperListener()
 * @return The String containing the message. An empty string otherwise
 */
     public String ReceiveMessage() {

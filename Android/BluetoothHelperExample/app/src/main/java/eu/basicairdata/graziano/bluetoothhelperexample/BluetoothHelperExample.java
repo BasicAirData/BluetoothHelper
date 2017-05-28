@@ -3,7 +3,6 @@ package eu.basicairdata.graziano.bluetoothhelperexample;
 /**
  * BluetoothHelper Java Helper Class for Android - Example app
  * Created by G.Capelli (BasicAirData) on 06/02/16.
- * v.1.0.2
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,6 +27,8 @@ import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import eu.basicairdata.bluetoothhelper.BluetoothHelper;
+
 
 public class BluetoothHelperExample extends AppCompatActivity {
 
@@ -37,14 +38,14 @@ public class BluetoothHelperExample extends AppCompatActivity {
     private TextView mTextViewStatus;
     boolean led = false;                                // The status of the ON/OFF led
     private String DEVICE_NAME = "RNBT-729D";           // The name of the remote device (BlueSMIRF Gold)
+    // private String DEVICE_NAME = "HC-05";            // The name of the remote device (HC-05)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);  //force portrait screen
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);  // force portrait screen
         setContentView(R.layout.activity_bluetooth_helper_example);
 
-        // Link objects to UI
         mTextViewStatus = (TextView) findViewById(R.id.ID_STATUSTEXT);
         mSeekBar = (SeekBar) findViewById(R.id.ID_SEEKBAR);
 
@@ -88,6 +89,12 @@ public class BluetoothHelperExample extends AppCompatActivity {
             @Override
             public void onBluetoothHelperMessageReceived(BluetoothHelper bluetoothhelper, String message) {
                 // Do your stuff with the message received !!!
+                // runOnUiThread(new Runnable() {
+                //     @Override
+                //     public void run() {
+                //         // Update here your User Interface
+                //     }
+                // });
             }
 
             @Override
