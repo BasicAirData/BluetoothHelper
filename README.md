@@ -5,7 +5,16 @@ Using this class you can Connect, Disconnect, Send String messages, Receive Stri
 
 For further information about this library and its usage you can read [this article](http://www.basicairdata.eu/projects/android/bluetooth-wireless-communication/).
 
-This repository contains:
+## Dependencies
+
+Use Gradle
+```gradle
+dependencies {
+    compile 'eu.basicairdata:bluetoothhelper:1.0.5'
+}
+```
+
+## This repository contains
 - <b>Android/BluetoothHelper.class</b> = The Helper Class for Android;
 
 The repo includes also a very simple but fully functional example, that shows how to use the helper class:
