@@ -14,7 +14,7 @@ dependencies {
 ```
 
 ## Getting started
-### 1) Setup
+### Setup
 - Add Bluetooth permissions to your AndroidManifest.xml:
 ```java
 <uses-permission android:name = "android.permission.BLUETOOTH_ADMIN"/>
@@ -46,20 +46,20 @@ mBluetoothHelper.setBluetoothHelperListener(new BluetoothHelper.BluetoothHelperL
     }
 });     
 ```
-### 2) Usage
-Connect to a bonded [BluetoothDevice](https://developer.android.com/reference/android/bluetooth/BluetoothDevice.html):
+### Usage
+- Connect to a bonded [BluetoothDevice](https://developer.android.com/reference/android/bluetooth/BluetoothDevice.html):
 ```java
 mBluetoothHelper.Connect(mBluetoothDevice);
 ```
-As alternative, connect to a BluetoothDevice directly using its Device Name:
+- As alternative, connect to a BluetoothDevice directly using its Device Name:
 ```java
 mBluetoothHelper.Connect("HC-05");
 ```
-Send a message:
+- Send a message:
 ```java
 mBluetoothHelper.SendMessage("Hello World");
 ```
-Disconnect:
+- Disconnect:
 ```java
 mBluetoothHelper.Disconnect();
 ```
