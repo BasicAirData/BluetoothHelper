@@ -28,8 +28,7 @@ BluetoothHelper mBluetoothHelper = new BluetoothHelper();
 ```java
 mBluetoothHelper.setBluetoothHelperListener(new BluetoothHelper.BluetoothHelperListener() {
     @Override
-    public void onBluetoothHelperMessageReceived(BluetoothHelper bluetoothhelper,
-                                                 final String message) {
+    public void onBluetoothHelperMessageReceived(BluetoothHelper bluetoothhelper, final String message) {
         // Do something with the message received
         // runOnUiThread(new Runnable() {
         //     @Override
@@ -40,8 +39,7 @@ mBluetoothHelper.setBluetoothHelperListener(new BluetoothHelper.BluetoothHelperL
     }
 
     @Override
-    public void onBluetoothHelperConnectionStateChanged(BluetoothHelper bluetoothhelper,
-                                                        boolean isConnected) {
+    public void onBluetoothHelperConnectionStateChanged(BluetoothHelper bluetoothhelper, boolean isConnected) {
         // Do something, depending on the new connection status
     }
 });     
