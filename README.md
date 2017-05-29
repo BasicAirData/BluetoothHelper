@@ -13,18 +13,18 @@ dependencies {
 }
 ```
 
-## How to use
-### Setup
-0) Add Bluetooth permissions to your AndroidManifest.xml:
+## Getting started
+### 1) Setup
+- Add Bluetooth permissions to your AndroidManifest.xml:
 ```java
 <uses-permission android:name = "android.permission.BLUETOOTH_ADMIN"/>
 <uses-permission android:name = "android.permission.BLUETOOTH"/>
 ```
-1) Declare a new BluetoothHelper instance into your activity:
+- Declare a new BluetoothHelper instance into your activity:
 ```java
 BluetoothHelper mBluetoothHelper = new BluetoothHelper();
 ```
-2) Setup a BluetoothHelperListener to receive the messages and the changes of the connection status:
+- Setup a BluetoothHelperListener to receive the messages and the changes of the connection status:
 ```java
 mBluetoothHelper.setBluetoothHelperListener(new BluetoothHelper.BluetoothHelperListener() {
     @Override
@@ -46,7 +46,7 @@ mBluetoothHelper.setBluetoothHelperListener(new BluetoothHelper.BluetoothHelperL
     }
 });     
 ```
-### Usage
+### 2) Usage
 Connect to a bonded [BluetoothDevice](https://developer.android.com/reference/android/bluetooth/BluetoothDevice.html):
 ```java
 mBluetoothHelper.Connect(mBluetoothDevice);
