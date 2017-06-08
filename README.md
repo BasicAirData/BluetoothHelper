@@ -14,6 +14,15 @@ dependencies {
     compile 'eu.basicairdata:bluetoothhelper:1.0.5'
 }
 ```
+Or Maven
+```xml
+<dependency>
+    <groupId>eu.basicairdata</groupId>
+    <artifactId>bluetoothhelper</artifactId>
+    <version>1.0.5</version>
+    <type>pom</type>
+</dependency>
+```
 
 ## Getting started
 ### Setup
