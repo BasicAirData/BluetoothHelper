@@ -86,7 +86,15 @@ The repo includes also a very simple but fully functional example, that shows ho
 - <b>Arduino/BluetoothHelperExample/</b> = The sketch for Arduino; this example (ready to be uploaded on Arduino 2009) is made to communicate with the example app;
 - <b>doc/</b> = The related documentation. The folder includes the API documentation of the Class and the electrical scheme of the microcontroller circuit, showing one of the possible hardware configurations (Arduino 2009 + BlueSMIRF Gold);
 
-## License and General Information
+## General Information
 [BasicAirData](http://www.basicairdata.eu) Open and free DIY air data instrumentation and telemetry.<br>
-[License and general info](https://github.com/BasicAirData/Document-Templates/blob/master/general-info.md)<br>
+
 [What is BasicAirData?](http://www.basicairdata.eu/attachments/others/BAD%20Brochure.pdf)
+
+## Reference documents
+
+[Code of conduct](CODE_OF_CONDUCT.md)
+
+[Contributing Information](CONTRIBUTING.md)
+
+[Repository License](LICENSE)
