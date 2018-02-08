@@ -5,7 +5,9 @@ Using this class you can Connect, Disconnect, Send String messages, Receive Stri
 
 The library is compatible with android 4.0 (API 14) and newer.
 
-For further information about this library and its usage you can read [this article](http://www.basicairdata.eu/projects/android/bluetooth-wireless-communication/).
+Here in this repo (in the Arduino/BluetoothHelperExample folder) you can also find a very simple example (around 100 lines of code, including comments) that shows how to use it.<br>
+You can find a complete implementation of this library in BasicAirData [Air Data Bridge](https://github.com/BasicAirData/AirDataBridge).<br>
+For further information about this library and its usage you can read [this article](http://www.basicairdata.eu/projects/android/bluetooth-wireless-communication/).<br>
 
 ## Dependencies
 Use Gradle
