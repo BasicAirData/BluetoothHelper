@@ -45,7 +45,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 * You can read the incoming messages attaching a Listener or using explicit polling.<br>
 * Connection, reading and writing processes are asynchronously made using 3 separated Threads.<br>
 * This Class is compatible with Android 4.0+
-* @version 1.0.5
+* @version 1.0.6b_20180513
 * @author BasicAirData
 */
 
@@ -371,18 +371,19 @@ public class BluetoothHelper {
 * @see android.bluetooth.BluetoothDevice#getName()
 */
     public void Connect(String DeviceName) {
-        if (!isConnected()) {
-            Disconnect(false);
+        if ((mBluetoothAdapter != null) && (!DeviceName.isEmpty())) {
+            if (!isConnected()) {
+                Disconnect(false);
 
-            mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();                               // Find adapter
-            if (mBluetoothAdapter.isEnabled()) {                                                    // Adapter found
-                Set<BluetoothDevice> devices = mBluetoothAdapter.getBondedDevices();                // Collect all bonded devices
-                for (BluetoothDevice bt : devices) {
-                    if (DeviceName.equals(bt.getName())) {                                          // Find requested device name
-                        //Log.w("myApp", "[#] Devicename match found: " + bt.getName());
-                        CT = new ConnectThread(bt);
-                        CT.start();
-                    } //else Log.w("myApp", "[#] Devicename doesn't match: " + bt.getName());
+                mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();                               // Find adapter
+                if (mBluetoothAdapter.isEnabled()) {                                                    // Adapter found
+                    Set<BluetoothDevice> devices = mBluetoothAdapter.getBondedDevices();                // Collect all bonded devices
+                    for (BluetoothDevice bt : devices) {
+                        if (DeviceName.equals(bt.getName())) {                                          // Find requested device name
+                            //Log.w("myApp", "[#] Devicename match found: " + bt.getName());
+                            Connect(bt);
+                        } //else Log.w("myApp", "[#] Devicename doesn't match: " + bt.getName());
+                    }
                 }
             }
         }
@@ -404,13 +405,15 @@ public class BluetoothHelper {
      * @see android.bluetooth.BluetoothDevice
      */
     public void Connect(BluetoothDevice bluetoothDevice) {
-        if (!isConnected()) {
-            Disconnect(false);
+        if ((mBluetoothAdapter != null) && (bluetoothDevice != null)) {
+            if (!isConnected()) {
+                Disconnect(false);
 
-            mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();                               // Find adapter
-            if (mBluetoothAdapter.isEnabled()) {                                                    // Adapter found
-                CT = new ConnectThread(bluetoothDevice);
-                CT.start();
+                mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();                               // Find adapter
+                if (mBluetoothAdapter.isEnabled()) {                                                    // Adapter found
+                    CT = new ConnectThread(bluetoothDevice);
+                    CT.start();
+                }
             }
         }
     }
@@ -422,8 +425,8 @@ public class BluetoothHelper {
 * The method is public in case of particular user needs.
 */
     public void ClearBuffer() {
-        inputMessagesQueue.clear();                          // Clear the input message queue;
-        outputMessagesQueue.clear();                         // Clear the output message queue;
+        if (inputMessagesQueue != null)  inputMessagesQueue.clear();                          // Clear the input message queue;
+        if (outputMessagesQueue != null) outputMessagesQueue.clear();                         // Clear the output message queue;
     }
 
 
@@ -433,10 +436,7 @@ public class BluetoothHelper {
 * An onBluetoothHelperConnectionStateChanged event occurs (if listener is attached) when the disconnection process terminates, returning the new status of the connection.
 */
     public void Disconnect() {
-        if (CT != null) {
-            if (CT.isAlive()) CT.cancel();
-        }
-        ClearBuffer();
+        Disconnect(true);
     }
 
 
@@ -467,6 +467,8 @@ public class BluetoothHelper {
 * @return The String containing the message. An empty string otherwise
 */
     public String ReceiveMessage() {
+        if (inputMessagesQueue != null) return "";
+
         String m = inputMessagesQueue.poll();
         return (m != null ? m : "");
     }
@@ -480,7 +482,7 @@ public class BluetoothHelper {
 * @return true if the message is stored in the sending queue. false if a problem occurs
 */
     public boolean SendMessage(String msg) {
-        if (isConnected()) {
+        if (isConnected() && (msg != null) && (outputMessagesQueue != null)) {
             return (outputMessagesQueue.offer(msg));
         } else return false;
     }
