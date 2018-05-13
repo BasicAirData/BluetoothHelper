@@ -1,4 +1,4 @@
-# BasicAirData BluetoothHelper
+# BasicAirData BluetoothHelper<br>[![Releases](http://img.shields.io/github/release/BasicAirData/BluetoothHelper.svg?label=%20release%20)](https://github.com/BasicAirData/BluetoothHelper/releases) [![GitHub license](https://img.shields.io/badge/license-GPL_3-blue.svg?label=%20license%20)](https://raw.githubusercontent.com/BasicAirData/GPSLogger/master/LICENSE)
 ## Bluetooth Java Class for Android
 This Java Class implements an easy message-based Bluetooth wireless communication layer between an **Android device** (the client) and a **Microcontroller** (the server).<br>
 Using this class you can Connect, Disconnect, Send String messages, Receive String messages via Listener (best way) or by explicit polling, automatically reconnect and check the status of your Bluetooth connection in a simple and thread-safe way.
