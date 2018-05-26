@@ -407,15 +407,14 @@ public class BluetoothHelper {
      * @see android.bluetooth.BluetoothDevice
      */
     public void Connect(BluetoothDevice bluetoothDevice) {
+        Log.w("myApp", "[ # ] Connect(BluetoothDevice bluetoothDevice)");
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();                                       // Find adapter
         if ((mBluetoothAdapter != null) && (bluetoothDevice != null)) {
-            if (!isConnected()) {
-                Disconnect(false);
-
-                mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();                               // Find adapter
-                if (mBluetoothAdapter.isEnabled()) {                                                    // Adapter found
-                    CT = new ConnectThread(bluetoothDevice);
-                    CT.start();
-                }
+            if (isConnected()) Disconnect(false);
+            mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();                               // Find adapter
+            if (mBluetoothAdapter.isEnabled()) {                                                    // Adapter found
+                CT = new ConnectThread(bluetoothDevice);
+                CT.start();
             }
         }
     }
