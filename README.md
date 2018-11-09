@@ -11,7 +11,7 @@ For further information about this library and its usage you can read [this arti
 Use Gradle
 ```gradle
 dependencies {
-    compile 'eu.basicairdata:bluetoothhelper:1.0.5'
+    implementation 'eu.basicairdata:bluetoothhelper:1.0.5'
 }
 ```
 Or Maven
