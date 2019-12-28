@@ -1,5 +1,7 @@
 # BasicAirData BluetoothHelper<br>[![Releases](http://img.shields.io/github/release/BasicAirData/BluetoothHelper.svg?label=%20release%20)](https://github.com/BasicAirData/BluetoothHelper/releases) [![GitHub license](https://img.shields.io/badge/license-GPL_3-blue.svg?label=%20license%20)](https://raw.githubusercontent.com/BasicAirData/GPSLogger/master/LICENSE)
-## Bluetooth Java Class for Android
+A Bluetooth Java Class for Android.<br>
+Offered by [BasicAirData](http://www.basicairdata.eu) - Open and free DIY air data instrumentation and telemetry 
+## Description
 This Java Class implements an easy message-based Bluetooth wireless communication layer between an **Android device** (the client) and a **Microcontroller** (the server).<br>
 Using this class you can Connect, Disconnect, Send String messages, Receive String messages via Listener (best way) or by explicit polling, automatically reconnect and check the status of your Bluetooth connection in a simple and thread-safe way.
 
@@ -88,11 +90,6 @@ The repo includes also a very simple but fully functional example, that shows ho
 - <b>Android/BluetoothHelperExample/</b> = Example app for Android - around 100 lines of code, including comments - that controls 2 leds (one ON/OFF using a button and one in PWM using a slider);
 - <b>Arduino/BluetoothHelperExample/</b> = The sketch for Arduino; this example (ready to be uploaded on Arduino 2009) is made to communicate with the example app;
 - <b>doc/</b> = The related documentation. The folder includes the API documentation of the Class and the electrical scheme of the microcontroller circuit, showing one of the possible hardware configurations (Arduino 2009 + BlueSMIRF Gold);
-
-## General Information
-[BasicAirData](http://www.basicairdata.eu) Open and free DIY air data instrumentation and telemetry.<br>
-
-[What is BasicAirData?](http://www.basicairdata.eu/attachments/others/BAD%20Brochure.pdf)
 
 ## Reference documents
 
