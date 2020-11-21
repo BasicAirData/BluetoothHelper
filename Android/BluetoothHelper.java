@@ -1,5 +1,6 @@
 package eu.basicairdata.bluetoothhelper;
 
+
 /**
  * BluetoothHelper Java Helper Class for Android
  * Created by G.Capelli (BasicAirData) on 06/02/16.
@@ -44,7 +45,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 * You can read the incoming messages attaching a Listener or using explicit polling.<br>
 * Connection, reading and writing processes are asynchronously made using 3 separated Threads.<br>
 * This Class is compatible with Android 4.0+
-* @version 1.0.6b_20180526
+* @version 1.0.5
 * @author BasicAirData
 */
 
@@ -76,12 +77,12 @@ public class BluetoothHelper {
                 try {
                     tmp = (BluetoothSocket) m.invoke(mmDevice, 1);
                 } catch (IllegalAccessException e) {
-                    Log.w("myApp", "[ ! ] Unable to connect socket (IllegalAccessException): " + e);
+                    //Log.w("myApp", "[!] Unable to connect socket (IllegalAccessException): " + e);
                 } catch (InvocationTargetException e) {
-                    Log.w("myApp", "[ ! ] Unable to connect socket (InvocationTargetException): " + e);
+                    //Log.w("myApp", "[!] Unable to connect socket (InvocationTargetException): " + e);
                 }
             } catch (NoSuchMethodException e) {
-                Log.w("myApp", "[ ! ] Unable to connect socket (NoSuchMethodException): " + e);
+                //Log.w("myApp", "[!] Unable to connect socket (NoSuchMethodException): " + e);
             }
             mmSocket = tmp;
         }
@@ -92,33 +93,29 @@ public class BluetoothHelper {
             try {
                 mmSocket.connect();
             } catch (IOException connectException) {
-                Log.w("myApp", "[ ! ] Connection through socket failed: " + connectException);
-                Log.w("myApp", "[ ! ] Trying fallback method");
+                //Log.w("myApp", "[!] Connection through socket failed: " + connectException);
+                //Log.w("myApp", "[!] Trying fallback method");
                 try {
                     // fallback method for android >= 4.2
                     tmp = (BluetoothSocket) mmDevice.getClass().getMethod("createRfcommSocket", new Class[]{int.class}).invoke(mmDevice, 1);
                 } catch (IllegalAccessException e) {
-                    Log.w("myApp", "[ ! ] Failed to create fallback Illegal Access: " + e);
+                    //Log.w("myApp", "[!] Failed to create fallback Illegal Access: " + e);
                     return;
                 } catch (IllegalArgumentException e) {
-                    Log.w("myApp", "[ ! ] Failed to create fallback Illegal Argument: " + e);
+                    //Log.w("myApp", "[!] Failed to create fallback Illegal Argument: " + e);
                     return;
                 } catch (InvocationTargetException e) {
-                    Log.w("myApp", "[ ! ] Failed to create fallback Invocation Target" + e);
+                    //Log.w("myApp", "[!] Failed to create fallback Invocation Target" + e);
                     return;
                 } catch (NoSuchMethodException e) {
-                    Log.w("myApp", "[ ! ] Failed to create fallback No Such Method" + e);
+                    //Log.w("myApp", "[!] Failed to create fallback No Such Method" + e);
                     return;
                 }
                 try {
                     // linked to tmp, so basicly a new socket
                     mmSocket.connect();
                 } catch (IOException e) {
-                    Log.w("myApp", "[ ! ] Failed to connect with fallback socket: " + e);
-                    try {
-                        sleep(200);
-                    } catch (InterruptedException ex) {
-                    }
+                    //Log.w("myApp", "[!] Failed to connect with fallback socket: " + e);
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
@@ -127,11 +124,11 @@ public class BluetoothHelper {
                     });
                     return;
                 }
-                Log.w("myApp", "[ # ] Succesfully connected with fallback socket");
+                //Log.w("myApp", "[#] Succesfully connected with fallback socket");
             }
             // Do work to manage the connection (in a separate thread)
             // manageConnectedSocket(mmSocket);
-            Log.w("myApp", "[ # ] Socket connected. Opening streams....");
+            //Log.w("myApp", "[#] Socket connected. Opening streams....");
             readThread = new ConnectedThreadClass_Read(mmSocket);
             readThread.start();
             writeThread = new ConnectedThreadClass_Write(mmSocket);
@@ -144,7 +141,7 @@ public class BluetoothHelper {
                 try {
                     sleep(100);
                 } catch (InterruptedException e) {
-                    Log.w("myApp", "[ ! ] ConnectThread Interrupted");
+                    //Log.w("myApp", "[!] ConnectThread Interrupted");
                     break;
                 }
                 // check the status of the connection and send listeners in case of changes
@@ -160,7 +157,7 @@ public class BluetoothHelper {
             } while (isConnected());
             cancel();
             //checkConnectionStatus();
-            Log.w("myApp", "[ # ] Socket closed");
+            //Log.w("myApp", "[#] Socket closed");
         }
 
         //Will cancel an connection and close streams and socket
@@ -180,8 +177,8 @@ public class BluetoothHelper {
 
     private void InCaseFireonBluetoothHelperConnectionStateChanged() {
         if (listener != null) {
-            if (isConnected()) Log.w("myApp", "[ # ] Listener fired: onBluetoothHelperConnectionStateChanged = true");
-            else Log.w("myApp", "[ # ] Listener fired: onBluetoothHelperConnectionStateChanged = false");
+            if (isConnected()) Log.w("myApp", "[#] Listener fired: onBluetoothHelperConnectionStateChanged = true");
+            else Log.w("myApp", "[#] Listener fired: onBluetoothHelperConnectionStateChanged = false");
             listener.onBluetoothHelperConnectionStateChanged(this, isConnected()); // <---- fire listener
         }
     }
@@ -206,7 +203,7 @@ public class BluetoothHelper {
         }
 
         public void run() {
-            Log.w("myApp", "[ # ] Input Stream opened");
+            //Log.w("myApp", "[#] Input Stream opened");
             // Keep listening to the InputStream until an exception occurs
             while (true) {
                 byte[] buffer = new byte[1024];  // buffer store for the stream
@@ -226,7 +223,7 @@ public class BluetoothHelper {
                 }
             }
             isInStreamConnected = false;
-            Log.w("myApp", "[ # ] Input stream closed");
+            //Log.w("myApp", "[#] Input stream closed");
         }
     }
 
@@ -234,16 +231,16 @@ public class BluetoothHelper {
     private void MessageReceived(String msg) {
         // if the listener is attached fire it
         // else put the message into buffer to be read
-        Log.w("myApp", "[ # ] Message received: " + msg);
+        //Log.w("myApp", "[#] Message received: " + msg);
         try {
             if (listener != null) {
-                Log.w("myApp", "[ # ]  Listener fired: onBluetoothHelperMessageReceived");
+                //Log.w("myApp", "[#]  Listener fired: onBluetoothHelperMessageReceived");
                 listener.onBluetoothHelperMessageReceived(this, msg); // <---- fire listener
             } else if (!inputMessagesQueue.offer(msg))
-                Log.w("myApp", "[ ! ] Message thrown (unable to store into buffer): " + msg)
+                //Log.w("myApp", "[!] Message thrown (unable to store into buffer): " + msg)
                 ;
         } catch (Exception e) {
-            Log.w("myApp", "[ ! ] Failed to receive message: " + e.getMessage());
+            //Log.w("myApp", "[!] Failed to receive message: " + e.getMessage());
         }
     }
 
@@ -267,7 +264,7 @@ public class BluetoothHelper {
         }
 
         public void run() {
-            Log.w("myApp", "[ # ] Output Stream opened");
+            //Log.w("myApp", "[#] Output Stream opened");
             // Keep sending messages to OutputStream until an exception occurs
             while (true) {
                 String msg;
@@ -275,21 +272,21 @@ public class BluetoothHelper {
                     msg = outputMessagesQueue.take();
                 } catch (InterruptedException e) {
                     isOutStreamConnected = false;
-                    Log.w("myApp", "[ ! ] Buffer not available: " + e.getMessage());
+                    //Log.w("myApp", "[!] Buffer not available: " + e.getMessage());
                     break;
                 }
                 try {
                     mmOutStream.write(msg.getBytes());
                     mmOutStream.write(Delimiter);
-                    Log.w("myApp", "[ # ] Message send: " + msg);
+                    //Log.w("myApp", "[#] Message send: " + msg);
                 } catch (IOException e) {
                     isOutStreamConnected = false;
-                    Log.w("myApp", "[ ! ] Unable to write data to output stream: " + e.getMessage());
+                    //Log.w("myApp", "[!] Unable to write data to output stream: " + e.getMessage());
                     break;
                 }
             }
             isOutStreamConnected = false;
-            Log.w("myApp", "[ # ] Output stream closed");
+            //Log.w("myApp", "[#] Output stream closed");
         }
     }
 
@@ -374,20 +371,20 @@ public class BluetoothHelper {
 * @see android.bluetooth.BluetoothDevice#getName()
 */
     public void Connect(String DeviceName) {
-        Log.w("myApp", "[ # ] Connect(String DeviceName)");
-        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();                                   // Find adapter
-        if ((mBluetoothAdapter != null) && (!DeviceName.isEmpty())) {
-            if (isConnected()) Disconnect(false);
+        if (!isConnected()) {
+            Disconnect(false);
+
+            mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();                               // Find adapter
             if (mBluetoothAdapter.isEnabled()) {                                                    // Adapter found
                 Set<BluetoothDevice> devices = mBluetoothAdapter.getBondedDevices();                // Collect all bonded devices
                 for (BluetoothDevice bt : devices) {
                     if (DeviceName.equals(bt.getName())) {                                          // Find requested device name
-                        Log.w("myApp", "[ # ] Devicename match found: " + bt.getName());
-                        Connect(bt);
-                    } //else Log.w("myApp", "[ # ] Devicename doesn't match: " + bt.getName());
+                        //Log.w("myApp", "[#] Devicename match found: " + bt.getName());
+                        CT = new ConnectThread(bt);
+                        CT.start();
+                    } //else Log.w("myApp", "[#] Devicename doesn't match: " + bt.getName());
                 }
             }
-
         }
     }
 
@@ -407,10 +404,9 @@ public class BluetoothHelper {
      * @see android.bluetooth.BluetoothDevice
      */
     public void Connect(BluetoothDevice bluetoothDevice) {
-        Log.w("myApp", "[ # ] Connect(BluetoothDevice bluetoothDevice)");
-        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();                                       // Find adapter
-        if ((mBluetoothAdapter != null) && (bluetoothDevice != null)) {
-            if (isConnected()) Disconnect(false);
+        if (!isConnected()) {
+            Disconnect(false);
+
             mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();                               // Find adapter
             if (mBluetoothAdapter.isEnabled()) {                                                    // Adapter found
                 CT = new ConnectThread(bluetoothDevice);
@@ -426,8 +422,8 @@ public class BluetoothHelper {
 * The method is public in case of particular user needs.
 */
     public void ClearBuffer() {
-        if (inputMessagesQueue != null)  inputMessagesQueue.clear();                          // Clear the input message queue;
-        if (outputMessagesQueue != null) outputMessagesQueue.clear();                         // Clear the output message queue;
+        inputMessagesQueue.clear();                          // Clear the input message queue;
+        outputMessagesQueue.clear();                         // Clear the output message queue;
     }
 
 
@@ -437,7 +433,10 @@ public class BluetoothHelper {
 * An onBluetoothHelperConnectionStateChanged event occurs (if listener is attached) when the disconnection process terminates, returning the new status of the connection.
 */
     public void Disconnect() {
-        Disconnect(true);
+        if (CT != null) {
+            if (CT.isAlive()) CT.cancel();
+        }
+        ClearBuffer();
     }
 
 
@@ -468,8 +467,6 @@ public class BluetoothHelper {
 * @return The String containing the message. An empty string otherwise
 */
     public String ReceiveMessage() {
-        if (inputMessagesQueue != null) return "";
-
         String m = inputMessagesQueue.poll();
         return (m != null ? m : "");
     }
@@ -483,7 +480,7 @@ public class BluetoothHelper {
 * @return true if the message is stored in the sending queue. false if a problem occurs
 */
     public boolean SendMessage(String msg) {
-        if (isConnected() && (msg != null) && (outputMessagesQueue != null)) {
+        if (isConnected()) {
             return (outputMessagesQueue.offer(msg));
         } else return false;
     }
